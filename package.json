@@ -1,0 +1,8 @@
+{
+  "name": "webpackiao",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "santosidauruk <santosidauruk@gmail.com>",
+  "license": "MIT",
+  "dependencies": {}
+}
