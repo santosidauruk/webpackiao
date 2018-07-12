@@ -1,8 +1,10 @@
 const path = require('path');
+const webpack = require("webpack");
+const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     entry: {
-        main: ["babel-polyfill", "./src/main.js"]
+        main: ["./src/main.js"]
     },
     mode: "development",
     output: {
@@ -15,7 +17,11 @@ module.exports = {
     devServer: {
         // dari mana konten di-serve, in this case: file2 html dari folder dist
         contentBase: "dist",
-        overlay: true
+        // to add pretty color to terminal
+        stats: {
+            colors: true
+        },
+        hot: true
     },
     module: {
         rules: [
@@ -43,15 +49,6 @@ module.exports = {
                 test: /\.html$/,
                 use: [
                     {
-                        loader: "file-loader",
-                        options: {
-                            name: "[name].html"
-                        }
-                    },
-                    {
-                        loader: "extract-loader"
-                    },
-                    {
                         loader: "html-loader",
                         options: {
                             attrs: ["img:src"]
@@ -71,5 +68,28 @@ module.exports = {
                 ]
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new HTMLWebpackPlugin({
+            template: "./src/index.html",
+            filename: "index.html"
+        }),
+        new HTMLWebpackPlugin({
+            template: "./src/about.html",
+            filename: "about.html"
+        }),
+        new HTMLWebpackPlugin({
+            template: "./src/help.html",
+            filename: "help.html"
+        }),
+        new HTMLWebpackPlugin({
+            template: "./src/satu.html",
+            filename: "satu.html"
+        }),
+        new HTMLWebpackPlugin({
+            template: "./src/dua.html",
+            filename: "dua.html"
+        })
+    ]
 }
